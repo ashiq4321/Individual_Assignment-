@@ -33,8 +33,14 @@ class LoginController extends Controller
                     ->first();
 
     	if($user != null){
-            $req->session()->put('email', $req->email);
-    		return view('welcome');
+			$req->session()->put('email', $req->email);
+			$req->session()->put('password', $req->password);
+			$req->session()->put('name', $user->name);
+			if($user->role=="busmanager"){
+				return redirect()->route('busmanager.index');
+			}
+			elseif($user->role=="admin")
+    		return redirect()->route('admin.index');
 
     	}else{
             $req->session()->flash('msg', 'try again');

@@ -19,3 +19,5 @@ Route::get('/', function () {
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@verify');
 Route::get('/logout', 'logoutController@index');
+Route::resource('busmanager', 'BusmangerController');
+Route::resource('admin', 'AdminController');
