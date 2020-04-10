@@ -29,6 +29,7 @@ class LoginController extends Controller
     	
         $user = DB::table('users')
                     ->where('email', $req->email)
+                    ->where('password', $req->password)
                     ->first();
 
     	if($user != null){
