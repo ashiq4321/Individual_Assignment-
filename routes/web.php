@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@verify');
+Route::get('/system/supportstaff/login', 'LoginController@index');
+Route::post('/system/supportstaff/login', 'LoginController@verify');
 Route::get('/logout', 'logoutController@index');
 Route::resource('busmanager', 'BusmangerController');
 Route::resource('admin', 'AdminController');

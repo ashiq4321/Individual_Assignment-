@@ -44,7 +44,7 @@ class LoginController extends Controller
 
     	}else{
             $req->session()->flash('msg', 'try again');
-            return redirect('/login');
+            return redirect('/system/supportstaff/login');
 		}
     }
 }

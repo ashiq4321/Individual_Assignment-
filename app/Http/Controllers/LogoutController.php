@@ -10,6 +10,6 @@ class LogoutController extends Controller
     	
     	$req->session()->flush();
 
-    	return redirect('/login');
+    	return redirect('/system/supportstaff/login');
     }
 }
