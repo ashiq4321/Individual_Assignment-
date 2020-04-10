@@ -5,6 +5,7 @@
 </head>
 <body>
 <h1>Welcome Home! {{session('name')}}</h1>&nbsp
+<a href="/logout">Logout</a> 
 	<form method="post" >
 		@csrf
 	</form>
