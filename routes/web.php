@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/system/supportstaff',function () {
     return view('system.index');
 });
-Route::get('/system/supportstaff/login', 'LoginController@index');
+Route::get('/system/supportstaff/login', 'LoginController@index')->name('login.index');
 Route::post('/system/supportstaff/login', 'LoginController@verify');
 Route::get('/logout', 'logoutController@index');
 Route::resource('register', 'RegisterController');

@@ -63,9 +63,12 @@ class RegisterController extends Controller
         $user->operator = '';
 
 		if($user->save()){
-			return redirect()->route('register.index');
+            $request->session()->put('email', $request->email);
+            $request->session()->put('name', $request->name);
+            $request->session()->flash('msg', 'registered successfully ');
+			return redirect()->route('login.index');
 		}else{
-            $req->session()->flash('msg', 'try again');
+            $request->session()->flash('msg', 'try again');
             return redirect()->route('register.index');
 		}
     	
