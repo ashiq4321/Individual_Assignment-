@@ -44,7 +44,8 @@ class AdminController extends Controller
     }
     public function deletebusmanager(Request $request)
     {
-        //
+        user::find($request->id)->delete();
+        return redirect()->route('busmanager.list');
     }
     /**
      * Display the specified resource.
