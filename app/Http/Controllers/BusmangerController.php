@@ -17,6 +17,14 @@ class BusmangerController extends Controller
     {
         return view('busmanager.index');
     }
+    public function busCounterAdd()
+    {
+        return view('busmanager.addCounter');
+    }
+    public function busCounterAdded()
+    {
+        return view('busmanager.addCounter');
+    }
     public function busCounterlist()
     {
           $user = DB::table('buscounters')->get();
@@ -29,7 +37,7 @@ class BusmangerController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
