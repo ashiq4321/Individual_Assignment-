@@ -5,7 +5,7 @@
 </head>
 <body>	
 <h1>bus Counter list</h1>
-
+<a href="/system/supportstaff/add">ADD<a>
 	<table border="1">
 		<tr>
 			<th>NAME</th>
