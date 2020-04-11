@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\admin;
+use App\user;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -16,7 +17,11 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
-
+    public function busManagerlist()
+    {
+        $users = User::all()->where('role', 'busmanager');
+		return view('admin.viewBusManager', ['users'=>$users]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -37,7 +42,10 @@ class AdminController extends Controller
     {
         //
     }
-
+    public function deletebusmanager(Request $request)
+    {
+        //
+    }
     /**
      * Display the specified resource.
      *

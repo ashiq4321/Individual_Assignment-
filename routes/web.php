@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/system/supportstaff',function () {
     return view('system.index');
 });
+Route::get('/system/busmanager', 'AdminController@busManagerlist')->name('busmanager.list');
+Route::get('/system/busmanager/{id}/delete', 'AdminController@deletebusmanager')->name('busmanager.delete');
 Route::get('/system/supportstaff/login', 'LoginController@index')->name('login.index');
 Route::post('/system/supportstaff/login', 'LoginController@verify');
 Route::get('/logout', 'logoutController@index');

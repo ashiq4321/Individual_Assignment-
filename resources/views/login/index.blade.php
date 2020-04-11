@@ -14,6 +14,6 @@
 	@foreach($errors->all() as $error)
 		{{$error}} <br>
 	@endforeach
-	<h3>{{session('msg')}},{{session('name')}}</h3>
+	<h3>{{session('msg')}} {{session('name')}}</h3>
 </body>
 </html>

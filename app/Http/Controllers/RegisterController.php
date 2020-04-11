@@ -53,6 +53,7 @@ class RegisterController extends Controller
         }
 
         $user 			= new User;
+        $user->id 	='';
 		$user->name 	= $request->name;
 		$user->email = $request->email;
 		$user->password 	= $request->password;
@@ -63,10 +64,10 @@ class RegisterController extends Controller
         $user->operator = '';
 
 		if($user->save()){
-            $request->session()->put('email', $request->email);
-            $request->session()->put('name', $request->name);
+            $request->session()->flash('email', $request->email);
+            $request->session()->flash('name', $request->name);
             $request->session()->flash('msg', 'registered successfully ');
-			return redirect()->route('login.index');
+            return redirect()->route('login.index');
 		}else{
             $request->session()->flash('msg', 'try again');
             return redirect()->route('register.index');
