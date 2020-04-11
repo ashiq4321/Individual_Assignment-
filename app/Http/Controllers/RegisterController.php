@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\register;
+use DateTime;
+use Validator;
+use App\User;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -24,7 +25,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +36,39 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required',
+            'cpassword'=>'same:password',
+            'company'=>'required|unique:users'
+		]);
+		if($validation->fails()){
+			return back()
+					->with('errors', $validation->errors())
+					->withInput();
+			return redirect()->route('register.index')
+							->with('errors', $validation->errors())
+							->withInput();		
+        }
+
+        $user 			= new User;
+		$user->name 	= $request->name;
+		$user->email = $request->email;
+		$user->password 	= $request->password;
+		$user->registered 	=new DateTime();
+		$user->validated = "1";
+        $user->role 	= "busmanager";
+        $user->company 	= $request->company;
+        $user->operator = '';
+
+		if($user->save()){
+			return redirect()->route('register.index');
+		}else{
+            $req->session()->flash('msg', 'try again');
+            return redirect()->route('register.index');
+		}
+    	
     }
 
     /**
