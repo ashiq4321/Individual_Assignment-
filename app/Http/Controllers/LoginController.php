@@ -37,6 +37,7 @@ class LoginController extends Controller
 			$req->session()->put('email', $req->email);
 			$req->session()->put('password', $req->password);
 			$req->session()->put('name', $user->name);
+			$req->session()->put('role', $user->role);
 			if($user->role=="busmanager"){
 				return redirect()->route('busmanager.index');
 			}

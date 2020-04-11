@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/system/supportstaff',function () {
+Route::get('/system',function () {
     return view('system.index');
 });
+Route::get('/system/buscounter', 'BusmangerController@busCounterlist')->name('buscounter.list');
+Route::get('/system/supportstaff', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
 Route::get('/system/busmanager', 'AdminController@busManagerlist')->name('busmanager.list');
 Route::get('/system/busmanager/{id}/delete', 'AdminController@deletebusmanager')->name('busmanager.delete');
 Route::get('/system/supportstaff/login', 'LoginController@index')->name('login.index');

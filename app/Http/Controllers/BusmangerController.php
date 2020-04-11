@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\busmanger;
+use App\User;
 use Illuminate\Http\Request;
 
 class BusmangerController extends Controller
@@ -16,7 +17,11 @@ class BusmangerController extends Controller
     {
         return view('busmanager.index');
     }
-
+    public function busCounterlist()
+    {
+          $user = DB::table('buscounters')->get();
+        return view('busmanager.viewBusCounter', ['users'=>$user]);
+    }
     /**
      * Show the form for creating a new resource.
      *
