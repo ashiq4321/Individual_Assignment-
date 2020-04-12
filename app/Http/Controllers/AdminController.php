@@ -19,6 +19,11 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+    public function buslist()
+    {
+        $users = DB::table('buses')->get();
+        return view('admin.viewBusList', ['users'=>$users]);
+    }
     public function busManagerlist()
     {
         $users = User::all()->where('role', 'busmanager');

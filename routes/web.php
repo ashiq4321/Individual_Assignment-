@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::get('/system',function () {
     return view('system.index');
 });
+Route::get('/system/buses', 'AdminController@buslist')->name('buses.list');
 Route::get('/system/supportstaff/add', 'AdminController@busManagerAdd')->name('admin.addmanager');
 Route::post('/system/supportstaff/add', 'AdminController@busManagerAdded');
 Route::post('/system/buscounter/add', 'BusmangerController@busCounterAdded');
