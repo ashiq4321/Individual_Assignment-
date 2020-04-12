@@ -6,7 +6,10 @@
 <body>	
 <h1>bus manager list</h1>
 	<a href="/logout">Logout</a> 
-
+	<form method="post" >
+		@csrf
+		<input type="text" name="search" > <br>
+		<input type="submit" name="submit" value="search" >
 	<table border="1">
 		<tr>
 			<th>NAME</th>
@@ -27,6 +30,6 @@
 		</tr>
 		@endforeach
 	</table>
-
+    </form>
 </body>
 </html>
