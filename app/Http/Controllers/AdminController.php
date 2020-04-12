@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 use Validator;
-use App\admin;
+use App\bus;
 use App\user;
 use Illuminate\Http\Request;
 
@@ -27,6 +27,39 @@ class AdminController extends Controller
     public function busAdd(Request $request)
     {
         return view('admin.addBus');
+    }
+    public function busAdded(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'name'=>'required',
+            'location'=>'required',
+            'seat_row'=>'required',
+            'seat_column'=>'required',
+            'company'=>'required',
+		]);
+		if($validation->fails()){
+			return back()
+					->with('errors', $validation->errors())
+					->withInput();
+			return redirect()->route('add.bus')
+							->with('errors', $validation->errors())
+							->withInput();		
+        }
+        $users = DB::table('users')->get();
+
+        $user 			= new bus;
+		$user->name 	= $request->name;
+		$user->location = $request->location;
+		$user->seat_row 	= $request->seat_row;
+		$user->seat_column 	=$request->seat_column;
+		$user->company = $request->company;
+        $user->manager = '';
+		if($user->save()){
+            return redirect()->route('buses.list');
+		}else{
+            $request->session()->flash('msg', 'try again');
+            return redirect()->route('add.bus');
+		}
     }
     public function busManagerlist()
     {
