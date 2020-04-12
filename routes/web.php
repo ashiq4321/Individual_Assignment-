@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/system',function () {
     return view('system.index');
 });
-Route::get('/system/supportstaff/add', 'AdminController@busManagerAdd');
+Route::get('/system/supportstaff/add', 'AdminController@busManagerAdd')->name('admin.addmanager');
 Route::post('/system/supportstaff/add', 'AdminController@busManagerAdded');
 Route::get('/system/buscounter', 'BusmangerController@busCounterlist')->name('buscounter.list')->middleware('sess','areYouAdmin');
 Route::get('/system/supportstaff', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');

@@ -51,9 +51,10 @@ class RegisterController extends Controller
 							->with('errors', $validation->errors())
 							->withInput();		
         }
+        $users = DB::table('users')->get();
 
         $user 			= new User;
-        $user->id 	='';
+        $user->id 	=count($users)+1;
 		$user->name 	= $request->name;
 		$user->email = $request->email;
 		$user->password 	= $request->password;

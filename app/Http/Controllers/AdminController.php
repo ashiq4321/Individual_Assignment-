@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use DateTime;
+use Validator;
 use App\admin;
 use App\user;
 use Illuminate\Http\Request;
@@ -22,46 +24,44 @@ class AdminController extends Controller
         $users = User::all()->where('role', 'busmanager');
 		return view('admin.viewBusManager', ['users'=>$users]);
     }
-    public function busManagerAdd()
+    public function busManagerAdd(Request $request)
     {
         return view('admin.addManager');
     }
-    public function busManagerAdded()
+    public function busManagerAdded(Request $request)
     {
         $validation = Validator::make($request->all(), [
             'name'=>'required',
-            'email'=>'required|email|unique:buscounters',
-            'location'=>'required|size:4',
-            'operator'=>'required|email|unique:users',
+            'email'=>'required|email|unique:users',
+            'password'=>'required',
+            'cpassword'=>'same:password'
 		]);
 		if($validation->fails()){
 			return back()
 					->with('errors', $validation->errors())
 					->withInput();
-			return redirect()->route('register.index')
+			return redirect()->route('admin.addManager')
 							->with('errors', $validation->errors())
 							->withInput();		
         }
+        $users = DB::table('users')->get();
 
         $user 			= new User;
-        $user->id 	='';
+        $user->id 	=count($users)+1;
 		$user->name 	= $request->name;
 		$user->email = $request->email;
 		$user->password 	= $request->password;
 		$user->registered 	=new DateTime();
 		$user->validated = "1";
         $user->role 	= "busmanager";
-        $user->company 	= $request->company;
+        $user->company 	= '';
         $user->operator = '';
 
 		if($user->save()){
-            $request->session()->flash('email', $request->email);
-            $request->session()->flash('name', $request->name);
-            $request->session()->flash('msg', 'registered successfully ');
-            return redirect()->route('login.index');
+            return redirect()->route('busmanager.list');
 		}else{
             $request->session()->flash('msg', 'try again');
-            return redirect()->route('register.index');
+            return redirect()->route('admin.addmanager');
 		}
     }
     /**
