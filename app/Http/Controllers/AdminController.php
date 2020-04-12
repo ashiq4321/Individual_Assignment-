@@ -24,6 +24,10 @@ class AdminController extends Controller
         $users = DB::table('buses')->get();
         return view('admin.viewBusList', ['users'=>$users]);
     }
+    public function busAdd(Request $request)
+    {
+        return view('admin.addBus');
+    }
     public function busManagerlist()
     {
         $users = User::all()->where('role', 'busmanager');

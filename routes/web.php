@@ -19,15 +19,16 @@ Route::get('/', function () {
 Route::get('/system',function () {
     return view('system.index');
 });
-Route::get('/system/buses', 'AdminController@buslist')->name('buses.list');
-Route::get('/system/supportstaff/add', 'AdminController@busManagerAdd')->name('admin.addmanager');
-Route::post('/system/supportstaff/add', 'AdminController@busManagerAdded');
-Route::post('/system/buscounter/add', 'BusmangerController@busCounterAdded');
+Route::get('/system/buses/add', 'AdminController@busAdd')->name('add.bus')->middleware('sess','areYouAdmin');
+Route::get('/system/buses', 'AdminController@buslist')->name('buses.list')->middleware('sess','areYouAdmin');
+Route::get('/system/supportstaff/add', 'AdminController@busManagerAdd')->name('admin.addmanager')->middleware('sess','areYouAdmin');
+Route::post('/system/supportstaff/add', 'AdminController@busManagerAdded')->middleware('sess','areYouAdmin');
+Route::post('/system/buscounter/add', 'BusmangerController@busCounterAdded')->middleware('sess','areYouManager');
 Route::get('/system/buscounter', 'BusmangerController@busCounterlist')->name('buscounter.list')->middleware('sess','areYouManager');
 Route::get('/system/buscounter/add', 'BusmangerController@busCounterAdd')->name('buscounter.add')->middleware('sess','areYouManager');
 Route::get('/system/supportstaff', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
 Route::get('/system/busmanager', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
-Route::get('/system/busmanager/{id}/delete', 'AdminController@deletebusmanager')->name('busmanager.delete');
+Route::get('/system/busmanager/{id}/delete', 'AdminController@deletebusmanager')->name('busmanager.delete')->middleware('sess','areYouAdmin');
 Route::get('/system/supportstaff/login', 'LoginController@index')->name('login.index');
 Route::post('/system/supportstaff/login', 'LoginController@verify');
 Route::get('/logout', 'logoutController@index');

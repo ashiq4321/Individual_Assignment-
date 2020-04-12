@@ -6,7 +6,7 @@
 <body>	
 <h1>bus  list</h1>
 	<a href="/logout">Logout</a> 
-		<a href="/system/buses/add">ADD<a>
+		<a href="{{route('add.bus')}}">ADD<a>
 	<table border="1">
 		<tr>
 		    <th>CoOMPANY</th>
