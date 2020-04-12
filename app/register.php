@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class register extends Model
 {
-    //
+    protected $table = 'users';
 }

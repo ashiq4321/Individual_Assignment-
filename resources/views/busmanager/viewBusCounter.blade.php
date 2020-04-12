@@ -5,7 +5,7 @@
 </head>
 <body>	
 <h1>bus Counter list</h1>
-<a href="/system/supportstaff/add">ADD<a>
+<a href="{{route('buscounter.add')}}">ADD<a>
 	<table border="1">
 		<tr>
 			<th>NAME</th>
@@ -15,10 +15,12 @@
 		
 		@foreach($users as $user)
 		<tr>
-			<td>{{$user['name']}}</td>
-			<td>{{$user['location']}}</td>
+			<td>{{$user->name}}</td>
+			<td>{{$user->location}}</td>
 			<td>
-			<a onclick="return confirm('Are you sure?')" href="{{route('busmanager.delete', $user['name'])}}">Delete</a>
+			<a href="#">Edit</a>
+			<a href="#">Delete</a>
+
 			</td>
 		</tr>
 		@endforeach

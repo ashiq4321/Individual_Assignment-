@@ -6,6 +6,7 @@
 <body>
 <h1>Welcome Home! {{session('name')}}</h1>&nbsp
 <a href="/logout">Logout</a> 
+<a href="{{route('buscounter.list')}}">buscounter</a> 
 	<form method="post" >
 		@csrf
 	</form>

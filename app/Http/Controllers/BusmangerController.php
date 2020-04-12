@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-use App\busmanger;
+use App\buscounter;
 use App\User;
+use Validator;
 use Illuminate\Http\Request;
 
 class BusmangerController extends Controller
@@ -21,48 +22,44 @@ class BusmangerController extends Controller
     {
         return view('busmanager.addCounter');
     }
-    public function busCounterAdded()
+    public function busCounterAdded( Request $request)
     {
         $validation = Validator::make($request->all(), [
             'name'=>'required',
             'email'=>'required|email|unique:buscounters',
             'location'=>'required|size:4',
             'operator'=>'required|email|unique:users',
+            'password'=>'required',
+            'cpassword'=>'same:password',
 		]);
 		if($validation->fails()){
 			return back()
 					->with('errors', $validation->errors())
 					->withInput();
-			return redirect()->route('register.index')
+			return redirect()->route('busmanager.addCounter')
 							->with('errors', $validation->errors())
 							->withInput();		
         }
 
-        $user 			= new User;
-        $user->id 	='';
+        $user 			= new buscounter;
 		$user->name 	= $request->name;
 		$user->email = $request->email;
 		$user->password 	= $request->password;
-		$user->registered 	=new DateTime();
-		$user->validated = "1";
-        $user->role 	= "busmanager";
-        $user->company 	= $request->company;
-        $user->operator = '';
+		$user->location 	=$request->location;
+        $user->operator = $request->operator;
 
-		if($user->save()){
-            $request->session()->flash('email', $request->email);
-            $request->session()->flash('name', $request->name);
-            $request->session()->flash('msg', 'registered successfully ');
-            return redirect()->route('login.index');
+		if($user->save()){    
+            return redirect()->route('buscounter.list');
 		}else{
             $request->session()->flash('msg', 'try again');
-            return redirect()->route('register.index');
+            return redirect()->route('busmanager.addCounter');
 		}
     }
     public function busCounterlist()
     {
-          $user = DB::table('buscounters')->get();
-        return view('busmanager.viewBusCounter', ['users'=>$user]);
+        $users = DB::table('buscounters')->get();
+        return view('busmanager.viewBusCounter', ['users'=>$users]);
+
     }
     /**
      * Show the form for creating a new resource.
