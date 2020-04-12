@@ -22,6 +22,48 @@ class AdminController extends Controller
         $users = User::all()->where('role', 'busmanager');
 		return view('admin.viewBusManager', ['users'=>$users]);
     }
+    public function busManagerAdd()
+    {
+        return view('admin.addManager');
+    }
+    public function busManagerAdded()
+    {
+        $validation = Validator::make($request->all(), [
+            'name'=>'required',
+            'email'=>'required|email|unique:buscounters',
+            'location'=>'required|size:4',
+            'operator'=>'required|email|unique:users',
+		]);
+		if($validation->fails()){
+			return back()
+					->with('errors', $validation->errors())
+					->withInput();
+			return redirect()->route('register.index')
+							->with('errors', $validation->errors())
+							->withInput();		
+        }
+
+        $user 			= new User;
+        $user->id 	='';
+		$user->name 	= $request->name;
+		$user->email = $request->email;
+		$user->password 	= $request->password;
+		$user->registered 	=new DateTime();
+		$user->validated = "1";
+        $user->role 	= "busmanager";
+        $user->company 	= $request->company;
+        $user->operator = '';
+
+		if($user->save()){
+            $request->session()->flash('email', $request->email);
+            $request->session()->flash('name', $request->name);
+            $request->session()->flash('msg', 'registered successfully ');
+            return redirect()->route('login.index');
+		}else{
+            $request->session()->flash('msg', 'try again');
+            return redirect()->route('register.index');
+		}
+    }
     /**
      * Show the form for creating a new resource.
      *

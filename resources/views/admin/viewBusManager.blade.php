@@ -10,6 +10,7 @@
 		@csrf
 		<input type="text" name="search" > <br>
 		<input type="submit" name="submit" value="search" >
+		<a href="/system/supportstaff/add">ADD<a>
 	<table border="1">
 		<tr>
 			<th>NAME</th>
