@@ -21,9 +21,9 @@ Route::get('/system',function () {
 });
 Route::get('/system/supportstaff/add', 'BusmangerController@busCounterAdd');
 Route::post('/system/supportstaff/add', 'BusmangerController@busCounterAdded');
-Route::get('/system/buscounter', 'BusmangerController@busCounterlist')->name('buscounter.list');
+Route::get('/system/buscounter', 'BusmangerController@busCounterlist')->name('buscounter.list')->middleware('sess','areYouAdmin');
 Route::get('/system/supportstaff', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
-Route::get('/system/busmanager', 'AdminController@busManagerlist')->name('busmanager.list');
+Route::get('/system/busmanager', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
 Route::get('/system/busmanager/{id}/delete', 'AdminController@deletebusmanager')->name('busmanager.delete');
 Route::get('/system/supportstaff/login', 'LoginController@index')->name('login.index');
 Route::post('/system/supportstaff/login', 'LoginController@verify');

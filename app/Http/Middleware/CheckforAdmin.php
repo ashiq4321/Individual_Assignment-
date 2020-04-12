@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use Illuminate\Support\Facades\DB;
-use App\User;
 use Closure;
-use Illuminate\Http\Request;
 
 class CheckforAdmin
 {
@@ -17,10 +14,10 @@ class CheckforAdmin
      */
     public function handle($request, Closure $next)
     {
-       
-        if($request->session()->get('role')!="admin"){
-                return view('admin.notadmin');
-            }
+        if(Session('role')!="admin"){
+            return response()->view('admin.notadmin');
+            
+        }
         else{
             return $next($request);
         }
