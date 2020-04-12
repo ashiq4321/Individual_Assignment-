@@ -9,8 +9,8 @@
 		@csrf
 		Name: <input type="text" name="name" > <br>
 		Email: <input type="text" name="email" > <br>
-		location: <input type="text" name="location" ><br>
-		operator: <input type="text" name="operator" ><br>
+		Password: <input type="password" name="password" ><br>
+		Confirm Password: <input type="password" name="cpassword" ><br>
 		<input type="submit" name="submit" value="Submit" >
 	</form>
 	@foreach($errors->all() as $error)
