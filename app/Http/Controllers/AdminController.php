@@ -21,7 +21,8 @@ class AdminController extends Controller
     }
     public function busEdit(Request $request)
     {
-        return view('admin.editBus');
+        $user = DB::table('buses')->where('id', $request->id)->first();
+        return view('admin.editBus', ['user'=>$user]);
     }
     public function buslist()
     {
