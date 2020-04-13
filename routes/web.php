@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/system',function () {
     return view('system.index');
 });
+Route::get('/system/buses/{id}/edit', 'AdminController@busEdit')->middleware('sess','areYouAdmin');
+Route::post('/system/buses/add', 'AdminController@busAdded');
 Route::post('/system/buses/add', 'AdminController@busAdded');
 Route::get('/system/buses/add', 'AdminController@busAdd')->name('add.bus')->middleware('sess','areYouAdmin');
 Route::get('/system/buses', 'AdminController@buslist')->name('buses.list')->middleware('sess','areYouAdmin');

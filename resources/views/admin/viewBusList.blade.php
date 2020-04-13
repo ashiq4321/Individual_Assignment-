@@ -26,7 +26,7 @@
 			<td>{{$user->name}}</td>
 			<td>{{$user->location}}</td>
 			<td>
-			<a href="#">Edit</a>
+			<a href="/system/buses/{{$user->id}}/edit">Edit</a>
 			<a href="#">Delete</a>
 			</td>
 		</tr>

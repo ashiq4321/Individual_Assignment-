@@ -19,6 +19,10 @@ class AdminController extends Controller
     {
         return view('admin.index');
     }
+    public function busEdit(Request $request)
+    {
+        return view('admin.editBus');
+    }
     public function buslist()
     {
         $users = DB::table('buses')->get();
@@ -45,9 +49,10 @@ class AdminController extends Controller
 							->with('errors', $validation->errors())
 							->withInput();		
         }
-        $users = DB::table('users')->get();
+        $users = DB::table('buses')->get();
 
         $user 			= new bus;
+        $user->id 	=count($users)+1;
 		$user->name 	= $request->name;
 		$user->location = $request->location;
 		$user->seat_row 	= $request->seat_row;
