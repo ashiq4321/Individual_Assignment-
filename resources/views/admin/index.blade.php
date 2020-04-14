@@ -8,9 +8,7 @@
 <a href="/logout">Logout</a> 
 <a href="{{route('busmanager.list')}}">view busmanager</a> 
 <a href="{{route('buses.list')}}">view Buses</a> 
-	<form method="post" >
-		@csrf
-	</form>
+
 
 </body>
 </html>

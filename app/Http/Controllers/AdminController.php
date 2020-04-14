@@ -166,9 +166,23 @@ class AdminController extends Controller
      * @param  \App\admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, admin $admin)
+    public function update(Request $request, bus $bus)
     {
-        //
+
+    }
+
+    public function updatebusinfo(Request $request, bus $bus)
+    {
+
+       $affected= DB::table('buses')
+              ->where('id', $request->id)
+              ->update(array('name' => $request->name,
+                       'location' => $request->location,
+                       'seat_row' => $request->seat_row,
+                       'seat_column' => $request->seat_column,
+                       'company' => $request->company));
+            return redirect()->route('buses.list');               
+
     }
 
     /**

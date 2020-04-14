@@ -23,8 +23,8 @@
 			<td>{{$user->manager}}</td>
 			<td>{{$user->name}}</td>
 			<td>{{$user->location}}</td>
-			<td>{{$user->name}}</td>
-			<td>{{$user->location}}</td>
+			<td>{{$user->seat_row}}</td>
+			<td>{{$user->seat_column}}</td>
 			<td>
 			<a href="/system/buses/{{$user->id}}/edit">Edit</a>
 			<a href="#">Delete</a>
