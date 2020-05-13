@@ -32,6 +32,7 @@ Route::get('/system/buscounter/add', 'BusmangerController@busCounterAdd')->name(
 Route::get('/system/supportstaff', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
 Route::get('/system/busmanager', 'AdminController@busManagerlist')->name('busmanager.list')->middleware('sess','areYouAdmin');
 Route::get('/system/busmanager/{id}/delete', 'AdminController@deletebusmanager')->name('busmanager.delete')->middleware('sess','areYouAdmin');
+Route::get('/system/busmanager/ajax/search', 'AdminController@busManagerSearch')->name('busmanager.search')->middleware('sess','areYouAdmin');
 Route::get('/system/supportstaff/login', 'LoginController@index')->name('login.index');
 Route::post('/system/supportstaff/login', 'LoginController@verify');
 Route::get('/logout', 'logoutController@index');
